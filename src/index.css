@@ -42,5 +42,19 @@ body {
 }
 
 .announcement {
+  height: 100%;
   font-size: 20px;
+}
+
+.images-wrapper {
+  display: flex;
+}
+
+.images-wrapper__item {
+  display: flex;
+  flex-direction: column;
+}
+
+.images-wrapper__item button {
+  margin-top: 10px;
 }

@@ -8,7 +8,7 @@ class AppCamera extends Component {
 
     return (
       <div style={{ visibility: firstPhoto ? "hidden" : "visible" }}>
-        <Camera onTakePhoto={this.props.onTakePhoto} />
+        <Camera onTakePhoto={this.props.onTakePhoto} isFullscreen />
       </div>
     );
   }
