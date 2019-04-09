@@ -1,25 +1,49 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+
+import AppCamera from "./AppCamera";
 
 class App extends Component {
+  state = {
+    firstPhoto: "",
+    secondPhoto: ""
+  };
+
+  onTakePhoto = dataUri => {
+    const { firstPhoto } = this.state;
+    if (!firstPhoto) {
+      this.setState({ firstPhoto: dataUri });
+      setTimeout(() => {
+        const photoButton = document.getElementById("outer-circle");
+        photoButton && photoButton.click();
+      }, 1000);
+    } else {
+      this.setState({ secondPhoto: dataUri });
+    }
+  };
+
   render() {
+    const { firstPhoto, secondPhoto } = this.state;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="app">
+        <h1 className="app-title">Next Photo</h1>
+        {!secondPhoto && (
+          <AppCamera onTakePhoto={this.onTakePhoto} firstPhoto={firstPhoto} />
+        )}
+        {firstPhoto && !secondPhoto && (
+          <p className="announcement">Taking photo...</p>
+        )}
+        {firstPhoto && secondPhoto && (
+          <div>
+            <img
+              style={{ marginRight: "15px" }}
+              src={firstPhoto}
+              width="250px"
+              alt=""
+            />
+            <img src={secondPhoto} width="250px" alt="" />
+          </div>
+        )}
       </div>
     );
   }
