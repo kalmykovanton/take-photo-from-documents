@@ -1,27 +1,29 @@
 import React, { Component } from "react";
 
 import AppCamera from "./AppCamera";
+import AppButton from "./AppButton";
+import AppImage from "./AppImage";
 
 class App extends Component {
   state = {
     firstPhoto: "",
     secondPhoto: "",
-    thirdPhoto: ""
+    thirdPhoto: "",
+    timestamp: ""
   };
 
   onTakePhoto = dataUri => {
     const { firstPhoto, secondPhoto } = this.state;
-    const photoButton = document.getElementById("outer-circle");
-    const takeAPhoto = () => {
-      photoButton && photoButton.click();
-    };
+    const takePhotoBtn = document.getElementById("outer-circle");
+    const takePhoto = () =>
+      setTimeout(() => takePhotoBtn && takePhotoBtn.click(), 1000);
 
     if (!firstPhoto) {
-      this.setState({ firstPhoto: dataUri });
-      setTimeout(takeAPhoto, 1000);
+      this.setState({ firstPhoto: dataUri, timestamp: Date.now() });
+      takePhoto();
     } else if (!secondPhoto) {
       this.setState({ secondPhoto: dataUri });
-      setTimeout(takeAPhoto, 1000);
+      takePhoto();
     } else {
       this.setState({ thirdPhoto: dataUri });
     }
@@ -33,7 +35,7 @@ class App extends Component {
   };
 
   render() {
-    const { firstPhoto, secondPhoto, thirdPhoto } = this.state;
+    const { firstPhoto, secondPhoto, thirdPhoto, timestamp } = this.state;
 
     return (
       <div
@@ -44,34 +46,37 @@ class App extends Component {
         {!thirdPhoto && (
           <AppCamera onTakePhoto={this.onTakePhoto} firstPhoto={firstPhoto} />
         )}
-        {firstPhoto && !secondPhoto && (
+        {firstPhoto && !thirdPhoto && (
           <p className="announcement">Taking photo...</p>
         )}
-        {firstPhoto && secondPhoto && (
+        {thirdPhoto && (
           <div className="images-wrapper">
             <div
               className="images-wrapper__item"
               style={{ marginRight: "15px" }}
             >
-              <img src={firstPhoto} width="250px" alt="" />
-              <button onClick={this.openInNewTab(firstPhoto)}>
-                Open in new tab
-              </button>
+              <AppImage src={firstPhoto} />
+              <AppButton
+                title={`normal_${timestamp}`}
+                onClick={this.openInNewTab(firstPhoto)}
+              />
             </div>
             <div
               className="images-wrapper__item"
               style={{ marginRight: "15px" }}
             >
-              <img src={secondPhoto} width="250px" alt="" />
-              <button onClick={this.openInNewTab(secondPhoto)}>
-                Open in new tab
-              </button>
+              <AppImage src={secondPhoto} />
+              <AppButton
+                title={`white_${timestamp}`}
+                onClick={this.openInNewTab(secondPhoto)}
+              />
             </div>
             <div className="images-wrapper__item">
-              <img src={thirdPhoto} width="250px" alt="" />
-              <button onClick={this.openInNewTab(thirdPhoto)}>
-                Open in new tab
-              </button>
+              <AppImage src={thirdPhoto} />
+              <AppButton
+                title={`black_${timestamp}`}
+                onClick={this.openInNewTab(thirdPhoto)}
+              />
             </div>
           </div>
         )}

@@ -39,11 +39,15 @@ body {
   margin: 0;
   text-align: center;
   color: lightgray;
+  z-index: 10;
 }
 
 .announcement {
-  height: 100%;
-  font-size: 20px;
+  position: absolute;
+  margin: 0;
+  font-size: 30px;
+  color: lightgray;
+  z-index: 10;
 }
 
 .images-wrapper {
