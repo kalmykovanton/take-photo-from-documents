@@ -16,7 +16,7 @@ class App extends Component {
     const { firstPhoto, secondPhoto } = this.state;
     const takePhotoBtn = document.getElementById("outer-circle");
     const takePhoto = () =>
-      setTimeout(() => takePhotoBtn && takePhotoBtn.click(), 1000);
+      setTimeout(() => takePhotoBtn && takePhotoBtn.click(), 100);
 
     if (!firstPhoto) {
       this.setState({ firstPhoto: dataUri, timestamp: Date.now() });
@@ -42,10 +42,14 @@ class App extends Component {
         className="app"
         style={{ backgroundColor: secondPhoto ? "#000" : "#fff" }}
       >
-        <h1 className="app-title">Next Photo</h1>
-        {!thirdPhoto && (
-          <AppCamera onTakePhoto={this.onTakePhoto} firstPhoto={firstPhoto} />
+        {firstPhoto && !thirdPhoto && (
+          <div
+            className="overlay"
+            style={{ backgroundColor: secondPhoto ? "#000" : "#fff" }}
+          />
         )}
+        <h1 className="app-title">Next Photo</h1>
+        {!thirdPhoto && <AppCamera onTakePhoto={this.onTakePhoto} />}
         {firstPhoto && !thirdPhoto && (
           <p className="announcement">Taking photo...</p>
         )}
