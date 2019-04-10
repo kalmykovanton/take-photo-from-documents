@@ -16,7 +16,7 @@ class App extends Component {
     const { firstPhoto, secondPhoto } = this.state;
     const takePhotoBtn = document.getElementById("outer-circle");
     const takePhoto = () =>
-      setTimeout(() => takePhotoBtn && takePhotoBtn.click(), 100);
+      setTimeout(() => takePhotoBtn && takePhotoBtn.click(), 300);
 
     if (!firstPhoto) {
       this.setState({ firstPhoto: dataUri, timestamp: Date.now() });
