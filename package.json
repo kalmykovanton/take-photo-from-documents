@@ -2,6 +2,7 @@
   "name": "take-photo-from-documents",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://kalmykovanton.github.io/take-photo-from-documents/",
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
