@@ -20,9 +20,9 @@ class App extends Component {
     const videoOffsetWidth = video.offsetWidth;
     const videoOffsetHeight = video.offsetHeight;
 
-    const rate = 3.5 / 4.5;
-    const rectHeight = videoOffsetHeight * rate;
-    const rectWidth = rectHeight * rate;
+    // const rate = 2.5 / 3;
+    const rectHeight = videoOffsetHeight * 0.6;
+    const rectWidth = rectHeight * 0.8;
     const rectX = (videoOffsetWidth - rectWidth) / 2;
     const rectY = (videoOffsetHeight - rectHeight) / 2;
 
