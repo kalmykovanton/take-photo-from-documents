@@ -9,7 +9,9 @@ class App extends Component {
     firstPhoto: "",
     secondPhoto: "",
     thirdPhoto: "",
-    croppedPhoto: "",
+    firstCroppedPhoto: "",
+    secondCroppedPhoto: "",
+    thirdCroppedPhoto: "",
     timestamp: "",
     videoRef: null,
     takePhotoBtnRef: null,
@@ -25,8 +27,9 @@ class App extends Component {
     const videoOffsetWidth = video.offsetWidth;
     const videoOffsetHeight = video.offsetHeight;
 
-    const rectWidth = Math.round(videoOffsetWidth / 3);
-    const rectHeight = Math.round((videoOffsetHeight / 3) * 2);
+    const rate = 2 / 3;
+    const rectHeight = videoOffsetHeight * rate;
+    const rectWidth = rectHeight * rate;
     const rectX = (videoOffsetWidth - rectWidth) / 2;
     const rectY = (videoOffsetHeight - rectHeight) / 2;
 
@@ -90,11 +93,12 @@ class App extends Component {
     const takePhoto = () =>
       setTimeout(() => takePhotoBtnRef && takePhotoBtnRef.click(), 300);
 
+    const img = new Image();
+    img.src = dataUri;
+    img.width = videoRef.offsetWidth;
+    img.height = videoRef.offsetHeight;
+
     if (!firstPhoto) {
-      const img = new Image();
-      img.src = dataUri;
-      img.width = videoRef.offsetWidth;
-      img.height = videoRef.offsetHeight;
       img.onload = () => {
         const croppedPhoto = this.cropImage(
           img,
@@ -103,14 +107,34 @@ class App extends Component {
           rectX,
           rectY
         );
-        this.setState({ croppedPhoto });
+        this.setState({ firstCroppedPhoto: croppedPhoto });
       };
       this.setState({ firstPhoto: dataUri, timestamp: Date.now() });
       takePhoto();
     } else if (!secondPhoto) {
+      img.onload = () => {
+        const croppedPhoto = this.cropImage(
+          img,
+          rectWidth,
+          rectHeight,
+          rectX,
+          rectY
+        );
+        this.setState({ secondCroppedPhoto: croppedPhoto });
+      };
       this.setState({ secondPhoto: dataUri });
       takePhoto();
     } else {
+      img.onload = () => {
+        const croppedPhoto = this.cropImage(
+          img,
+          rectWidth,
+          rectHeight,
+          rectX,
+          rectY
+        );
+        this.setState({ thirdCroppedPhoto: croppedPhoto });
+      };
       this.setState({ thirdPhoto: dataUri });
     }
   };
@@ -125,7 +149,9 @@ class App extends Component {
       firstPhoto,
       secondPhoto,
       thirdPhoto,
-      croppedPhoto,
+      firstCroppedPhoto,
+      secondCroppedPhoto,
+      thirdCroppedPhoto,
       timestamp
     } = this.state;
 
@@ -151,45 +177,66 @@ class App extends Component {
           <p className="announcement">Taking photo...</p>
         )}
         {thirdPhoto && (
-          <div className="images-wrapper">
-            <div
-              className="images-wrapper__item"
-              style={{ marginRight: "15px" }}
-            >
-              <AppImage src={croppedPhoto} />
-              <AppButton
-                title={`cropped_${timestamp}`}
-                onClick={this.openInNewTab(croppedPhoto)}
-              />
+          <React.Fragment>
+            <div className="images-wrapper">
+              <div
+                className="images-wrapper__item"
+                style={{ marginRight: "15px" }}
+              >
+                <AppImage src={firstCroppedPhoto} />
+                <AppButton
+                  title={`normal_cropped_${timestamp}`}
+                  onClick={this.openInNewTab(firstCroppedPhoto)}
+                />
+              </div>
+              <div
+                className="images-wrapper__item"
+                style={{ marginRight: "15px" }}
+              >
+                <AppImage src={secondCroppedPhoto} />
+                <AppButton
+                  title={`white_cropped_${timestamp}`}
+                  onClick={this.openInNewTab(secondCroppedPhoto)}
+                />
+              </div>
+              <div className="images-wrapper__item">
+                <AppImage src={thirdCroppedPhoto} />
+                <AppButton
+                  title={`black_cropped_${timestamp}`}
+                  onClick={this.openInNewTab(thirdCroppedPhoto)}
+                />
+              </div>
             </div>
-            <div
-              className="images-wrapper__item"
-              style={{ marginRight: "15px" }}
-            >
-              <AppImage src={firstPhoto} />
-              <AppButton
-                title={`normal_${timestamp}`}
-                onClick={this.openInNewTab(firstPhoto)}
-              />
+            <div className="images-wrapper images-wrapper--bottom-margin">
+              <div
+                className="images-wrapper__item"
+                style={{ marginRight: "15px" }}
+              >
+                <AppImage src={firstPhoto} />
+                <AppButton
+                  title={`normal_${timestamp}`}
+                  onClick={this.openInNewTab(firstPhoto)}
+                />
+              </div>
+              <div
+                className="images-wrapper__item"
+                style={{ marginRight: "15px" }}
+              >
+                <AppImage src={secondPhoto} />
+                <AppButton
+                  title={`white_${timestamp}`}
+                  onClick={this.openInNewTab(secondPhoto)}
+                />
+              </div>
+              <div className="images-wrapper__item">
+                <AppImage src={thirdPhoto} />
+                <AppButton
+                  title={`black_${timestamp}`}
+                  onClick={this.openInNewTab(thirdPhoto)}
+                />
+              </div>
             </div>
-            <div
-              className="images-wrapper__item"
-              style={{ marginRight: "15px" }}
-            >
-              <AppImage src={secondPhoto} />
-              <AppButton
-                title={`white_${timestamp}`}
-                onClick={this.openInNewTab(secondPhoto)}
-              />
-            </div>
-            <div className="images-wrapper__item">
-              <AppImage src={thirdPhoto} />
-              <AppButton
-                title={`black_${timestamp}`}
-                onClick={this.openInNewTab(thirdPhoto)}
-              />
-            </div>
-          </div>
+          </React.Fragment>
         )}
       </div>
     );

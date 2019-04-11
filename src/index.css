@@ -52,6 +52,11 @@ body {
 
 .images-wrapper {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.images-wrapper--bottom-margin {
+  margin-bottom: 20px;
 }
 
 .images-wrapper__item {
