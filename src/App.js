@@ -29,6 +29,8 @@ class App extends Component {
     const { rectHeightMulter, rectWidthMulter, rectStatus } = this.state;
     const resizeButton = document.getElementById("resize-button");
     const video = document.querySelector("video");
+    video.setAttribute("width", 768); //todo: REMOVE!!!
+    video.setAttribute("height", 576); //todo: REMOVE!!!
     const videoOffsetWidth = video.offsetWidth;
     const videoOffsetHeight = video.offsetHeight;
 
