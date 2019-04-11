@@ -4,23 +4,23 @@ self.__precacheManifest = [
     "url": "/take-photo-from-documents/static/js/runtime~main.7ea697e9.js"
   },
   {
-    "revision": "916fdb9e6cfbf44449fc",
-    "url": "/take-photo-from-documents/static/js/main.6785b28f.chunk.js"
+    "revision": "b9ddc7648699ec96a935",
+    "url": "/take-photo-from-documents/static/js/main.99876ab9.chunk.js"
   },
   {
-    "revision": "3ac1e5f0019f6419b22f",
-    "url": "/take-photo-from-documents/static/js/2.a62d633a.chunk.js"
+    "revision": "b8dbcada91643de95dc2",
+    "url": "/take-photo-from-documents/static/js/2.9f2b8fe5.chunk.js"
   },
   {
-    "revision": "916fdb9e6cfbf44449fc",
+    "revision": "b9ddc7648699ec96a935",
     "url": "/take-photo-from-documents/static/css/main.a6377ebb.chunk.css"
   },
   {
-    "revision": "3ac1e5f0019f6419b22f",
+    "revision": "b8dbcada91643de95dc2",
     "url": "/take-photo-from-documents/static/css/2.0928c41b.chunk.css"
   },
   {
-    "revision": "6ad298fa85c063a56c8a988c704d978a",
+    "revision": "a245644c0a72f20dbdad246261109fdd",
     "url": "/take-photo-from-documents/index.html"
   }
 ];
