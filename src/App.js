@@ -21,7 +21,7 @@ class App extends Component {
     const videoOffsetHeight = video.offsetHeight;
 
     // const rate = 2.5 / 3;
-    const rectHeight = videoOffsetHeight * 0.4;
+    const rectHeight = videoOffsetHeight * 0.35;
     const rectWidth = rectHeight * 0.8;
     const rectX = (videoOffsetWidth - rectWidth) / 2;
     const rectY = (videoOffsetHeight - rectHeight) / 2;
