@@ -84,3 +84,18 @@ body {
   margin: auto;
   z-index: 1;
 }
+
+#container-circles {
+  bottom: 62px !important;
+}
+
+#outer-circle {
+  height: 55px !important;
+  width: 55px !important;
+}
+
+#inner-circle {
+  height: 30px !important;
+  width: 30px !important;
+  margin: -25px 0 0 -15px !important;
+}
