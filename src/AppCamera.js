@@ -9,6 +9,7 @@ const AppCamera = ({ onTakePhoto, onCameraStart }) => (
       onTakePhoto={onTakePhoto}
       onCameraStart={onCameraStart}
       idealFacingMode={FACING_MODES.ENVIRONMENT}
+      isImageMirror={false}
     />
   </div>
 );

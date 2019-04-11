@@ -41,7 +41,7 @@ class App extends Component {
       rectX,
       rectY
     });
-  }, 1500);
+  }, 3000);
 
   cropImage = (img, newWidth, newHeight, startX, startY) => {
     var tnCanvas = document.createElement("canvas");
